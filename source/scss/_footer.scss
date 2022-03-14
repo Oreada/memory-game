@@ -1,0 +1,29 @@
+.footer__row {
+	height: 50px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.footer__info {
+	display: flex;
+}
+
+.info {
+	& > *:not(:last-child) {
+		margin: 0px 15px 0px 0px;
+	}
+
+	margin: 0px 30px 0px 0px;
+}
+
+.info__link,
+.footer__link {
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

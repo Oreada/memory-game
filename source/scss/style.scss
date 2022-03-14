@@ -1,0 +1,197 @@
+// Файл обнуляющих стилей
+@import "_nullstyle";
+
+body {
+	height: 100%;
+	line-height: 1;
+	font-size: 22px;
+	color: darken(#808000, 20%);
+	font-family: Neucha;
+	background: #8a9a5b;
+}
+// ОБОЛОЧКА
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+}
+// ОСНОВНАЯ СЕТКА
+._container {
+	max-width: 1200px;
+	padding: 0px 15px; //! отступы безопасности
+	margin: 0px auto; //! позволяет контейнеру выстроиться посередине
+	box-sizing: content-box;
+	//! Переключили контейнер с border-box на content-box после добавления паддинга, чтобы паддинг не считался частью max-width
+}
+
+img {
+	//! чтобы не ломались картинки
+	max-width: 100%;
+	height: auto; //! или так при необходимости: max-height: 100%; object-fit: cover;
+}
+
+//================================================================================================
+
+// Подключение header
+@import "_header";
+
+//================================================================================================
+
+// ОСНОВНОЙ БЛОК: CONTENT
+
+//================================================================================================
+
+//===== main ===============================================================================
+
+.main {
+	flex: 1 1 auto;
+	display: flex;
+}
+
+.main__container {
+	position: relative;
+
+	margin: auto; //! чтобы блок .game стал по центру: и по оси Х, и по оси У
+}
+
+.game {
+	display: flex;
+	flex-wrap: wrap;
+
+	width: 640px;
+	height: 640px;
+
+	perspective: 1000px;
+}
+
+.game__card {
+	position: relative;
+
+	width: calc(25% - 10px); //! четыре колонки и марджины по 5рх
+	height: calc(33.333% - 10px);
+	margin: 5px;
+
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+	transform: scale(1); //! начальный размер равен 100%
+
+	transform-style: preserve-3d; //! чтобы расположить карту в трехмерном пространстве, созданном в родительском элементе (см. perspective)
+	transition: transform 0.5s ease 0s;
+
+	&:active {
+		transform: scale(0.97); //! при натажии на этот элемент - размер меньше, только 97%
+
+		transition: transform 0.3s ease 0s;
+	}
+}
+
+.game__card.flip {
+	//! класс .flip навешивается при клике на карточку (см. JS)
+	transform: rotateY(180deg); //! так мы переворачиваем и рубашку, и картинку - оба img, которые есть в .game__card
+}
+
+.card__frontface,
+.card__backface {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	padding: 20px;
+	background-color: #808000;
+	border-radius: 5px;
+
+	backface-visibility: hidden; //! прячем изнанку обоих img, иначе она появляется при перевороте карты
+}
+
+.card__frontface {
+	//! сразу переворачиваем лицо, чтобы лицевая сторона и рубашка смотрели в противоположные стороны, как на настоящих картах
+	transform: rotateY(180deg);
+}
+
+svg {
+	fill: rgb(247, 244, 178);
+}
+
+svg.card__backface {
+	fill: rgba(247, 244, 178, 0.3);
+}
+
+.results {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	padding: 40px;
+
+	background: rgba(255, 253, 208, 0.8);
+}
+
+.results__box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.results__title {
+	font-size: 35px;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.results__steps {
+	font-weight: 600;
+}
+
+.score__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 0 40px 20px 40px;
+}
+
+.score__date {
+	margin-right: 80px;
+}
+
+//======== just button ================================================================================
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: #808000;
+	opacity: 1;
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+
+	width: 200px;
+	height: 50px;
+	border-radius: 30px;
+	text-transform: uppercase;
+
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+
+	&:hover {
+		// color: #8a9a5b;
+		border: 2px solid darken(#808000, 20%);
+	}
+}
+
+//========  ================================================================================
+
+//========  ================================================================================
+
+//================================================================================================
+
+// Подключение footer
+@import "_footer";
